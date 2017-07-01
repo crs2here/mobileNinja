@@ -18,6 +18,14 @@ import {  Body,
 var bnLogo = require ('../../Assets/iOS/Resources/icons/Icon-167.png');
 
 class MainScene extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -49,16 +57,25 @@ class MainScene extends Component {
             <Form>
               <Item floatingLabel>
                 <Label>Username</Label>
-                <Input />
+                <Input 
+                  onChangeText={(username) => this.setState({username})}
+                  value={this.state.username}                
+                />                
               </Item>
               <Item floatingLabel last>
                 <Label>Password</Label>
-                <Input secureTextEntry={true} />
+                <Input  secureTextEntry={true}
+                        onChangeText={(password) => this.setState({password})}
+                        value={this.state.password}                
+                />
               </Item>
             </Form>          
           </View>        
           <View>
-            <Button info block>
+            <Button 
+              info block
+              onPress={() => { console.log(this.state)}}
+            >
               <Text style={{color:"white",fontSize:18}}>login</Text>
             </Button>
           </View>                              
@@ -69,3 +86,6 @@ class MainScene extends Component {
 }
 
 export default MainScene;
+
+// onChangeText={(username) => this.setState({username})}
+// value={this.state.username}
