@@ -1,15 +1,19 @@
 import    React, { Component } from 'react';
 import {  Image, View } from 'react-native';
-import {  Container, 
-          Content, 
+import {  Body, 
+          Button, 
           Card, 
           CardItem, 
-          Thumbnail, 
+          Container,
+          Content, 
+          Form, 
+          Header,
+          Input, 
+          Item, 
+          Label,
           Text, 
-          Button, 
-          Body, 
-          Title, 
-          Header} from 'native-base';
+          Thumbnail, 
+          Title} from 'native-base';
 
 var bnLogo = require ('../../Assets/iOS/Resources/icons/Icon-167.png');
 
@@ -27,26 +31,38 @@ class MainScene extends Component {
             <CardItem style={{backgroundColor:'#F5F5F5'}}>
               <Body>
                 <Image
-                  style={{height: 100, width: 350, flex: 1}}
+                  style={{height: 80, width: 350, flex: 1}}
                   source={bnLogo}
                 />                  
-                <Text style={{textAlign: 'left', marginTop: 10, marginBottom: 30, fontSize:16, fontWeight:'bold'}}>Banquet Ninja is dedicated to your success.</Text>
+                <Text style={{textAlign: 'left', marginTop: 6, marginBottom: 25, fontSize:16, fontWeight:'bold'}}>Banquet Ninja is dedicated to your success.</Text>
                 <Text>
                    Our heritage is over 20 years of serving banquets and during that time we have crafted workflows that make our company run. Banquet Ninja wants you to participate in an ecosystem where ideas for success are shared and the workflows put those ideas into practice.
                 </Text>
-                <Text style={{textAlign: 'left', marginTop: 30, marginBottom: 30, fontWeight:'bold'}}>Running a restaurant is hard.{"\n"}
+                <Text style={{textAlign: 'left', marginTop: 20, marginBottom: 20, fontWeight:'bold'}}>Running a restaurant is hard.{"\n"}
                                                                   Really hard.{"\n"}
                                                                   Banquet Ninja can help make it easier.</Text>
 
               </Body>
             </CardItem>
-          </Card>                 
-        </Content>
-        <View style={{ paddingLeft:20, paddingRight:20, paddingBottom: 80}}>
-          <Button info block>
-            <Text style={{color:"white",fontSize:18}}>login</Text>
-          </Button>
-        </View>   
+          </Card>
+          <View>
+            <Form>
+              <Item floatingLabel>
+                <Label>Username</Label>
+                <Input />
+              </Item>
+              <Item floatingLabel last>
+                <Label>Password</Label>
+                <Input secureTextEntry={true} />
+              </Item>
+            </Form>          
+          </View>        
+          <View>
+            <Button info block>
+              <Text style={{color:"white",fontSize:18}}>login</Text>
+            </Button>
+          </View>                              
+        </Content>       
       </Container>
     );
   }  
