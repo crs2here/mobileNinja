@@ -14,21 +14,45 @@ import {  Body,
           Text, 
           Thumbnail, 
           Title} from 'native-base';
+import Login from '../components/login'
+import { observer } from 'mobx-react/native'
+          
 
 var bnLogo = require ('../../Assets/iOS/Resources/icons/Icon-167.png');
 
 class MainScene extends Component {
+
   constructor(props){
     super(props);
     this.state = {
       username: '',
       password: ''
+      // loggedIn: false,
+      // loadedCookie: false      
     }
   }
 
+  // componentWillMount () {
+  //   CookieManager.get(HOME_URL, (err, cookie) => {
+  //     let isAuthenticated;
+  //     // If it differs, change `cookie.remember_me` to whatever the name for your persistent cookie is!!!
+  //     if (cookie && cookie.hasOwnProperty('remember_me')) {
+  //       isAuthenticated = true;
+  //     }
+  //     else {
+  //       isAuthenticated = false;
+  //     }
+
+  //     this.setState({
+  //       loggedIn: isAuthenticated,
+  //       loadedCookie: true
+  //     });
+  //   });
+  // }
+
   render() {
     return (
-      <Container>
+      <Container style={{flex: 1, backgroundColor: '#F5FCFF',}}>
         <Content>
         <Header>
           <Body>
@@ -53,32 +77,7 @@ class MainScene extends Component {
               </Body>
             </CardItem>
           </Card>
-          <View>
-            <Form>
-              <Item floatingLabel>
-                <Label>Username</Label>
-                <Input 
-                  onChangeText={(username) => this.setState({username})}
-                  value={this.state.username}                
-                />                
-              </Item>
-              <Item floatingLabel last>
-                <Label>Password</Label>
-                <Input  secureTextEntry={true}
-                        onChangeText={(password) => this.setState({password})}
-                        value={this.state.password}                
-                />
-              </Item>
-            </Form>          
-          </View>        
-          <View>
-            <Button 
-              info block
-              onPress={() => { console.log(this.state)}}
-            >
-              <Text style={{color:"white",fontSize:18}}>login</Text>
-            </Button>
-          </View>                              
+          <Login {...this.props}/>                   
         </Content>       
       </Container>
     );
@@ -88,4 +87,4 @@ class MainScene extends Component {
 export default MainScene;
 
 // onChangeText={(username) => this.setState({username})}
-// value={this.state.username}
+// value={this.state.username}              {/*onPress={() => { console.log(this.state)}}*/}
