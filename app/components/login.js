@@ -2,8 +2,6 @@ import    React, { Component } from 'react';
 import {  Image, View } from 'react-native';
 import {  Body, 
           Button, 
-          Card, 
-          CardItem, 
           Container,
           Content, 
           Form, 
@@ -12,14 +10,7 @@ import {  Body,
           Item, 
           Label,
           Text, 
-          Thumbnail, 
-          Title,
-          
-          InputGroup,
-  
-          Icon,
-  
-          Spinner        } from 'native-base';
+          Title        } from 'native-base';
 
 import { observer } from 'mobx-react/native'
 // import AuthStore from './stores/authStore'
