@@ -7,6 +7,7 @@ export default class AuthStore {
   constructor() {}
 
   @action  // need to figure out mobx stuff
+  // need to figure out how to call this from login component
   signIn({email, password}) {
     (async () => {
       try {  
