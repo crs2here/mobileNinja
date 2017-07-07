@@ -1,16 +1,11 @@
 import    React, { Component } from 'react';
-import {  Image, View } from 'react-native';
-import {  Body, 
-          Button, 
-          Container,
-          Content, 
+import {  View } from 'react-native';
+import {  Button, 
           Form, 
-          Header,
           Input, 
           Item, 
           Label,
-          Text, 
-          Title        } from 'native-base';
+          Text} from 'native-base';
 
 import { observer } from 'mobx-react/native'
 // import AuthStore from './stores/authStore'

@@ -1,18 +1,13 @@
 import    React, { Component } from 'react';
 import {  Image, View } from 'react-native';
-import {  Body, 
-          Button, 
+import {  Body,  
           Card, 
           CardItem, 
           Container,
           Content, 
-          Form, 
           Header,
-          Input, 
           Item, 
-          Label,
-          Text, 
-          Thumbnail, 
+          Text,  
           Title} from 'native-base';
 import Login from '../components/login'
 import { observer } from 'mobx-react/native'
