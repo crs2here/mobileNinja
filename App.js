@@ -3,7 +3,7 @@ import React, { Component } from "react"
 
 // Scenes
 import MainScene from "./app/scenes/mainScene";
-import BanquetScene from "./app/scenes/banquetScene";
+import EventScene from "./app/scenes/eventScene";
 
 // Stores
 import AuthStore from "./app/stores/authStore"
@@ -22,10 +22,10 @@ export default class App extends React.Component {
                     initial
                     />
                 <Scene 
-                    key="banquet" 
-                    component={BanquetScene} 
+                    key="events" 
+                    component={EventScene} 
                     animation="fade"
-                    title="Banquet.ninja info"
+                    title="Upcoming Events"
                     navigationBarStyle={{backgroundColor:'#C0D0E4'}}
                     />                        
             </Scene>
