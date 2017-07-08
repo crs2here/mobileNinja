@@ -3,6 +3,7 @@ import React, { Component } from "react"
 
 // Scenes
 import MainScene from "../scenes/mainScene";
+import BanquetScene from "../scenes/banquetScene";
 
 // Stores
 import AuthStore from "../stores/authStore"
@@ -14,7 +15,7 @@ class Routers extends Component {
                 <Scene key="mainFlow">
                     <Scene 
                         key="main" 
-                        component={MainScene}
+                        component={MainScene} //MainScene
                         title="Banquet.ninja"
                         />
                 </Scene>
