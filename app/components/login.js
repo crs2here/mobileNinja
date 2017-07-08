@@ -6,7 +6,7 @@ import {  Button,
           Item, 
           Label,
           Text} from 'native-base';
-
+import { Actions } from 'react-native-router-flux';
 import { observer } from 'mobx-react/native'
 // import AuthStore from './stores/authStore'
 
@@ -27,8 +27,12 @@ export default class Login extends Component {
   // trying to write post here and then will move it to store
   signIn() { 
     const { username, password } = this.state;
+    if( username && password ){
+      console.log(password);
+      return Actions.banquet;
+    }
     // const results =asyncSignIn(username,password);
-    console.log(results);
+    // console.log(`${username} ${password}`);
     // this.setState({loading: true},() => {
     //   console.log(email);
     // })
@@ -54,9 +58,10 @@ export default class Login extends Component {
                     value={this.state.password}/>
           </Item>
         </Form>
+        {/*{this.signIn.bind(this)}*/}
         <Button 
           info block
-          onPress={this.signIn.bind(this)}>
+          onPress={Actions.banquet}>
           <Text style={{color:"white",fontSize:18}}>login</Text>
         </Button>                  
       </View>      

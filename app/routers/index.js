@@ -12,12 +12,20 @@ class Routers extends Component {
     render() {
         return (
             <Router store={AuthStore}>
-                <Scene key="mainFlow">
+                <Scene key="root">
                     <Scene 
                         key="main" 
-                        component={MainScene} //MainScene
+                        component={MainScene}
                         title="Banquet.ninja"
+                        initial={true}
+                        navigationBarStyle={{backgroundColor:'#C0D0E4'}}
                         />
+                    <Scene 
+                        key="banquet" 
+                        component={BanquetScene} 
+                        title="Banquet ninja info"
+                        navigationBarStyle={{backgroundColor:'#C0D0E4'}}
+                        />                        
                 </Scene>
             </Router>
         );
