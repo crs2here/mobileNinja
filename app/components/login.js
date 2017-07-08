@@ -1,5 +1,5 @@
 import    React, { Component } from 'react';
-import {  View } from 'react-native';
+import {  Alert, View } from 'react-native';
 import {  Button, 
           Form, 
           Input, 
@@ -29,8 +29,11 @@ export default class Login extends Component {
     const { username, password } = this.state;
     if( username && password ){
       console.log(password);
-      return Actions.banquet;
-    }
+      return Actions.banquet();
+    } else {
+      const missingData = (!username) ? 'username' : 'password';
+      Alert.alert('Missing Data',`please enter a ${missingData}`,[{text: 'ok'}]);
+    } 
     // const results =asyncSignIn(username,password);
     // console.log(`${username} ${password}`);
     // this.setState({loading: true},() => {
@@ -38,6 +41,7 @@ export default class Login extends Component {
     // })
   }  
   render() {
+        
     const { loading } = this.state
     // const { auth } = this.props.store
 
@@ -61,7 +65,8 @@ export default class Login extends Component {
         {/*{this.signIn.bind(this)}*/}
         <Button 
           info block
-          onPress={Actions.banquet}>
+          onPress={this.signIn.bind(this)}>
+
           <Text style={{color:"white",fontSize:18}}>login</Text>
         </Button>                  
       </View>      
