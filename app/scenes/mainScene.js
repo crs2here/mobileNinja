@@ -1,5 +1,5 @@
 import    React, { Component } from 'react';
-import {  Image, View } from 'react-native';
+import {  View } from 'react-native';
 import {  Body,  
           Card, 
           CardItem, 
@@ -9,12 +9,11 @@ import {  Body,
           Item, 
           Text,  
           Title} from 'native-base';
-import Login from '../components/login'
-import { observer } from 'mobx-react/native'
+import { observer } from 'mobx-react/native';
+
+import Login from '../components/login';
+import Logo from '../components/logo';
           
-
-var bnLogo = require ('../../Assets/iOS/Resources/icons/Icon-167.png');
-
 export default class MainScene extends Component {
 
   constructor(props){
@@ -57,10 +56,7 @@ export default class MainScene extends Component {
           <Card style={{ flex: 0 }}>
             <CardItem style={{ backgroundColor: '#F5F5F5' }}>
               <Body>
-                <Image
-                  style={{ height: 80, width: 350, flex: 1 }}
-                  source={bnLogo}
-                />
+                <Logo/>
                 <Text style={{ textAlign: 'left', marginTop: 6, marginBottom: 25, fontSize: 16, fontWeight: 'bold' }}>Banquet Ninja is dedicated to your success.</Text>
                 <Text>
                   Our heritage is over 20 years of serving banquets and during that time we have crafted workflows that make our company run. Banquet Ninja wants you to participate in an ecosystem where ideas for success are shared and the workflows put those ideas into practice.
