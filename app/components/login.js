@@ -29,7 +29,7 @@ export default class Login extends Component {
     const { username, password } = this.state;
     if( username && password ){
       console.log(password);
-      return Actions.banquet();
+      return Actions.events();
     } else {
       const missingData = (!username) ? 'username' : 'password';
       Alert.alert('Missing Data',`please enter a ${missingData}`,[{text: 'ok'}]);
@@ -62,7 +62,6 @@ export default class Login extends Component {
                     value={this.state.password}/>
           </Item>
         </Form>
-        {/*{this.signIn.bind(this)}*/}
         <Button 
           info block
           onPress={this.signIn.bind(this)}>
