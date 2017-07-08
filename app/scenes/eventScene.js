@@ -1,35 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, 
-         View,
-         Text } from 'react-native';
-import { Container, 
-         Content, 
-         List, 
-         ListItem} from 'native-base';
+import { Container, Content} from 'native-base';
+import EventList from '../components/eventList'
 
 export default class EventScene extends Component {
   render() {
-    var items = ['Simon Mignolet','Nathaniel Clyne','Dejan Lovren','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can'];
     return (
-      <Container syt>
+      <Container>
         <Content>
-          <View style={styles.container}>
-            <List dataArray={items} renderRow={(item) =>           
-                <ListItem>
-                  <Text>{item}</Text>
-                </ListItem>
-              }>        
-            </List>
-          </View> 
+          <EventList/>
         </Content>
       </Container>
     );
   };
 };
-
-const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 64
-  },
-})
