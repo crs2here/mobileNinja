@@ -15,7 +15,7 @@ import { observer } from 'mobx-react/native'
 
 var bnLogo = require ('../../Assets/iOS/Resources/icons/Icon-167.png');
 
-class MainScene extends Component {
+export default class MainScene extends Component {
 
   constructor(props){
     super(props);
@@ -54,20 +54,20 @@ class MainScene extends Component {
             <Title>Welcome to banquet.ninja</Title>
           </Body>
         </Header>          
-          <Card style={{flex: 0}}>
-            <CardItem style={{backgroundColor:'#F5F5F5'}}>
+          <Card style={{ flex: 0 }}>
+            <CardItem style={{ backgroundColor: '#F5F5F5' }}>
               <Body>
                 <Image
-                  style={{height: 80, width: 350, flex: 1}}
+                  style={{ height: 80, width: 350, flex: 1 }}
                   source={bnLogo}
-                />                  
-                <Text style={{textAlign: 'left', marginTop: 6, marginBottom: 25, fontSize:16, fontWeight:'bold'}}>Banquet Ninja is dedicated to your success.</Text>
+                />
+                <Text style={{ textAlign: 'left', marginTop: 6, marginBottom: 25, fontSize: 16, fontWeight: 'bold' }}>Banquet Ninja is dedicated to your success.</Text>
                 <Text>
-                   Our heritage is over 20 years of serving banquets and during that time we have crafted workflows that make our company run. Banquet Ninja wants you to participate in an ecosystem where ideas for success are shared and the workflows put those ideas into practice.
-                </Text>
-                <Text style={{textAlign: 'left', marginTop: 20, marginBottom: 20, fontWeight:'bold'}}>Running a restaurant is hard.{"\n"}
-                                                                  Really hard.{"\n"}
-                                                                  Banquet Ninja can help make it easier.</Text>
+                  Our heritage is over 20 years of serving banquets and during that time we have crafted workflows that make our company run. Banquet Ninja wants you to participate in an ecosystem where ideas for success are shared and the workflows put those ideas into practice.
+                  </Text>
+                <Text style={{ textAlign: 'left', marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Running a restaurant is hard.{"\n"}
+                  Really hard.{"\n"}
+                  Banquet Ninja can help make it easier.</Text>
 
               </Body>
             </CardItem>
@@ -78,8 +78,3 @@ class MainScene extends Component {
     );
   }  
 }
-
-export default MainScene;
-
-// onChangeText={(username) => this.setState({username})}
-// value={this.state.username}              {/*onPress={() => { console.log(this.state)}}*/}
