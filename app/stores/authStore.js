@@ -1,29 +1,44 @@
-import { observable, action } from 'mobx'
 import apiBase from '../config/development';
+import { observable, action } from 'mobx';
 
 export default class AuthStore {
-  @observable authUser = null
-
-  constructor() {}
-
-  @action  // need to figure out mobx stuff
-  // need to figure out how to call this from login component
-  signIn({email, password}) {
-    (async () => {
-      try {  
-        const login = new apiBase;
-        let response = await fetch(`${login.url}/account/login`, {  
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },body: JSON.stringify({username,password})
-        });
-        return await response.json();
-      } catch(error) {
-        console.error(error);
-      }
-    })();
+  
+  constructor() {
+  }
+  @action
+  signIn(username, password) {
+    const login = new apiBase;
+    return new Promise((resolve, reject) =>{
+      fetch(`${login.url}/account/login`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },body: JSON.stringify({username,password})
+      }).then((res) =>{
+        resolve(res.json());
+      }).catch((error)=>{
+        reject(error);
+      }).done();      
+    });
   }
 }
 
+
+/*
+  (async () => {
+    try {  
+      const login = new apiBase;
+      return await fetch(`${login.url}/account/login`, {  
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },body: JSON.stringify({username,password})
+      });
+      // return await response.json();
+    } catch(error) {
+      console.error(error);
+    }
+  })();
+ */
