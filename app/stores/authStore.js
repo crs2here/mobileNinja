@@ -23,22 +23,3 @@ export default class AuthStore {
     });
   }
 }
-
-
-/*
-  (async () => {
-    try {  
-      const login = new apiBase;
-      return await fetch(`${login.url}/account/login`, {  
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },body: JSON.stringify({username,password})
-      });
-      // return await response.json();
-    } catch(error) {
-      console.error(error);
-    }
-  })();
- */
