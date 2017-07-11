@@ -7,8 +7,8 @@ import {  Button,
           Label,
           Text} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { observer } from 'mobx-react/native'
-// import AuthStore from './stores/authStore'
+import { observer } from 'mobx-react/native';
+import AuthStore from '../stores/authStore';
 
 @observer
 export default class Login extends Component {
@@ -16,35 +16,34 @@ export default class Login extends Component {
     super(props)
     this.state = {
       username: '',
-      password: '',
-      loading: null
+      password: ''
     }
   }
   updateUsername(username) { this.setState({username}) }
   updatePassword(password) { this.setState({password}) }
 
-
-  // trying to write post here and then will move it to store
-  signIn() { 
+  signIn() {
     const { username, password } = this.state;
     if( username && password ){
-      console.log(password);
-      return Actions.events();
+      const auth = new AuthStore();
+      auth.signIn(username, password)
+        .then((response)=>{
+          if(response.success){
+            console.log(response);
+            Actions.events();
+          } else {
+            Alert.alert('Invalid Credentials',`please enter a correct data`,[{text: 'ok'}]);
+          }
+        })
+        .catch((error)=>{
+          console.log(`error = ${error}`);
+        })
     } else {
       const missingData = (!username) ? 'username' : 'password';
       Alert.alert('Missing Data',`please enter a ${missingData}`,[{text: 'ok'}]);
     } 
-    // const results =asyncSignIn(username,password);
-    // console.log(`${username} ${password}`);
-    // this.setState({loading: true},() => {
-    //   console.log(email);
-    // })
   }  
   render() {
-        
-    const { loading } = this.state
-    // const { auth } = this.props.store
-
     return (
       <View>
         <Form>
@@ -72,43 +71,3 @@ export default class Login extends Component {
     )  
   }
 }
-/*onPress={this.props.onLoginPress}*/
-// <View theme={this.props.theme}>
-//   <InputGroup style={{marginBottom:10}} boarderType='round'>
-//     <Icon style={{color:"#fff"}} name='person-outline'/>
-//     <Input style={{color:"#fff"}}
-//       placeholder='Please Enter Email'
-//       placeholderTextColor="#fff"
-//       onChangeText={(email) => { this.updateEmail(email)}} />
-//   </InputGroup>
-//   <InputGroup style={{marginBottom:10}} boarderType='round'>
-//     <Icon style={{color:"#fff"}} name='lock-open'/>
-//     <Input style={{color:"#fff"}}
-//       placeholder='Please Enter Password'
-//       placeholderTextColor="#fff"
-//       secureTextEntry={true}
-//       onChangeText={(pass) => { this.updatePassword(pass)}} />
-//   </InputGroup>
-//   <Button rounded block style={{marginBottom:10}} onPress={this.signIn.bind(this)}>
-//     {'Login'}
-//   </Button>
-// </View>  
-
-    // console.log("~~~~~~~~~~~~~~~~~~~~");
-    // console.log(this.props);
-    // const authStore = new AuthStore()
-    // console.log("===================");
-    // console.log(this.props.store.AuthStore);
-    // console.log("===================!!!!!!!!!!!");
-    // const { email, password } = this.state
-    // this.setState({loading: true},() => {
-      // this.props.store(email, password);
-      // authStore.signIn(email, password);
-      // call function with parsed arguments
-      // auth.signIn({email, password})
-      //   .then(() => {
-      //     this.props.navigator.replace({
-      //       title: 'Match',
-      //       passProps: this.props
-      //     })
-      //   })
