@@ -2,16 +2,26 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
-import { observer } from 'mobx-react/native'
-
+import { observer } from 'mobx-react/native';
+import EventStore from '../stores/eventStore';
 @observer
 export default class EventList extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
-  // updateUsername(username) { this.setState({username}) }
-  // updatePassword(password) { this.setState({password}) }
+  componentDidMount() {
+    const event = new EventStore();
+    let upcomingEvent;
+    event.getEventData()
+      .then((response)=>{
+        console.log(response);
+        upcomingEvent = response;
+      })
+      .catch((error)=>{
+        console.log(`error = ${error}`);
+      });
+  }
   
   render() {
     var items = ['Simon Mignolet','Nathaniel Clyne','Dejan Lovren','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can','Mama Sakho','Emre Can'];
@@ -78,3 +88,24 @@ const styles = StyleSheet.create({
     marginTop: 15
   },  
 })
+
+
+/*
+ stolen code from fb
+
+  return fetch('https://facebook.github.io/react-native/movies.json')
+  .then((response) => response.json())
+  .then((responseJson) => {
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.setState({
+      isLoading: false,
+      dataSource: ds.cloneWithRows(responseJson.movies),
+    }, function() {
+      // do something with new state
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+*/
