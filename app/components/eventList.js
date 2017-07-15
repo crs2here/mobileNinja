@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
-import { observer } from 'mobx-react/native';
 import EventStore from '../stores/eventStore';
 import AuthStore from '../stores/authStore';
 import moment from 'moment';
 const auth = new AuthStore();
-@observer
+
 export default class EventList extends Component {
   constructor(props) {
     super(props)
@@ -27,30 +26,19 @@ export default class EventList extends Component {
       const event = new EventStore();
       event.getEventData(this.state.token)
         .then((response)=>{
-          
           // temp num of people hard coded
           let events = response.data.map(function(eventDetail) {
-            // need to get location
-            let {eventDate, eventName} = eventDetail;
+            const {_id, eventDate, eventName} = eventDetail;
+            const {name} = eventDetail.venue[0] || "";
             return {
+              _id,
               eventDate,
               eventName,
-              location: "room",
+              location: name || "no location set",
               guestCount: 50              
             }
           });
-          console.log(events);
 
-          // const {eventDate, eventName} = response.data[0];
-          // console.log(eventDate);
-          // console.log(moment().format());
-          // const eventData = {
-          //   eventDate,
-          //   eventName,
-          //   location: response.data[0].venue[0].name,
-          //   guestCount: 50
-          // }
-          // console.log(eventData);
           this.setState({
             isLoading: false,
             upcomingEvents: events
@@ -73,7 +61,7 @@ export default class EventList extends Component {
         (isLoading)
           ? <Text> Something went wrong </Text> 
           : <List dataArray={upcomingEvents} renderRow={(event) =>           
-            <ListItem>
+            <ListItem onPress={() =>{ console.log(event._id)}}>
               <Grid>
                   {/* 
                     add touchable to row 
@@ -87,9 +75,9 @@ export default class EventList extends Component {
                     {/*time of event*/} 
                     <Text style={styles.dateBoxText}> {moment(event.eventDate).format("h:mm a")} </Text> 
                   </Col>
-                  <Col style={styles.detailBox}>
+                  <Col style={styles.detailBox} >
                     <View style={styles.detailBoxView}>
-                      <Text onPress={() =>{ console.log(event)}}> Event name: {event.eventName}</Text>
+                      <Text> Event name: {event.eventName}</Text>
                     </View>                  
                     <View style={styles.detailBoxView}>
                       <Text>Guest: {event.guestCount}</Text>
@@ -122,7 +110,8 @@ const styles = StyleSheet.create({
     marginTop:5,
     color: 'white',
     justifyContent: 'space-around',
-    alignSelf:'center'
+    alignSelf:'center',
+    fontWeight: 'bold'
   },  
   detailBox : {
     backgroundColor: '#F5F5F5', 
