@@ -9,7 +9,7 @@ import {  Body,
           Item, 
           Text,  
           Title} from 'native-base';
-import { observer } from 'mobx-react/native';
+// import { observer } from 'mobx-react/native';
 
 import Login from '../components/login';
 import Logo from '../components/logo';
