@@ -10,6 +10,8 @@ import { Actions } from 'react-native-router-flux';
 import { observer } from 'mobx-react/native';
 import AuthStore from '../stores/authStore';
 
+const auth = new AuthStore();
+
 @observer
 export default class Login extends Component {
   constructor(props) {
@@ -25,11 +27,11 @@ export default class Login extends Component {
   signIn() {
     const { username, password } = this.state;
     if( username && password ){
-      const auth = new AuthStore();
       auth.signIn(username, password)
         .then((response)=>{
           if(response.success){
-            console.log(response);
+            auth.storeToken(response.token);
+            this.setState({ token: response.token });             
             Actions.events();
           } else {
             Alert.alert('Invalid Credentials',`please enter a correct data`,[{text: 'ok'}]);
@@ -42,7 +44,21 @@ export default class Login extends Component {
       const missingData = (!username) ? 'username' : 'password';
       Alert.alert('Missing Data',`please enter a ${missingData}`,[{text: 'ok'}]);
     } 
+  }
+  
+  componentDidMount() {
+    auth.isLoggedIn()
+    .then((token)=>{
+      if(token.length > 0){
+        Actions.events();
+        this.setState({token}); 
+      }
+    })
+    .catch((error)=>{
+      console.log(`error = ${error}`);
+    });    
   }  
+
   render() {
     return (
       <View>
