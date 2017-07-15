@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native'; 
 import apiBase from '../config/development';
 import { observable, action } from 'mobx';
 
@@ -22,4 +23,11 @@ export default class AuthStore {
       }).done();      
     });
   }
+  async isLoggedIn () { 
+    let response = await AsyncStorage.getItem('x-access-token'); 
+    return await JSON.parse(response) || []; 
+  }
+  async storeToken (token) { 
+    await AsyncStorage.setItem('x-access-token', JSON.stringify(token)); 
+  }      
 }
