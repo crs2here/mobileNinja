@@ -5,7 +5,6 @@
   "devDependencies": {
     "react-native-scripts": "0.0.50",
     "jest-expo": "~18.0.0",
-    "native-base": "^2.1.5",
     "react-test-renderer": "16.0.0-alpha.12"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -23,7 +22,7 @@
     "@expo/vector-icons": "^5.0.0",
     "expo": "^18.0.3",
     "moment": "^2.18.1",
-    "native-base": "^2.1.5",
+    "native-base": "2.2.0",
     "react": "16.0.0-alpha.12",
     "react-moment": "^0.6.0",
     "react-native": "^0.45.1",
