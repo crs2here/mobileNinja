@@ -1,35 +1,111 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+} from 'react-native';
 import { Container, Content, List, ListItem, Text, Separator } from 'native-base';
-export default class ListSeparatorExample extends Component {
+// import * as Animatable from 'react-native-animatable';
+import Collapsible from 'react-native-collapsible';
+
+export default class ExampleView extends Component {
+  state = {
+    foodCollapsed: true,
+    notesCollapsed: true,
+    sequenceCollapsed: true, 
+  };
+
   render() {
     return (
       <Container style={{paddingTop: 64}}>
-        <Content>
-          <Separator bordered>
+        
+        <TouchableHighlight onPress={() => { this.setState({ foodCollapsed: !this.state.foodCollapsed });}}>
+          <View style={styles.header}>
             <Text>Food</Text>
-          </Separator>
-          <ListItem last>
-            { (false)                           ? 
-              <Text>mock out stuff here</Text> : 
-              <View></View>
-            }
-          </ListItem>
-          <Separator bordered>
+          </View>
+        </TouchableHighlight>
+        <Collapsible collapsed={this.state.foodCollapsed} align="center">
+          <View style={styles.content}>
+            <Text>Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs</Text>
+          </View>
+        </Collapsible>
+
+        <TouchableHighlight  onPress={() => { this.setState({ notesCollapsed: !this.state.notesCollapsed });}}>
+          <View style={styles.header}>
             <Text>Notes</Text>
-          </Separator>
-          <ListItem>
-            <Text>mock out notes</Text>
-          </ListItem>
-        </Content>
+          </View>
+        </TouchableHighlight>
+        <Collapsible collapsed={this.state.notesCollapsed} align="center">
+          <View style={styles.content}>
+            <Text>Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs</Text>
+          </View>
+        </Collapsible>
+
+        <TouchableHighlight  onPress={() => { this.setState({ sequenceCollapsed: !this.state.sequenceCollapsed });}}>
+          <View style={styles.header}>
+            <Text>Sequence</Text>
+          </View>
+        </TouchableHighlight>
+        <Collapsible collapsed={this.state.sequenceCollapsed} align="center">
+          <View style={styles.content}>
+            <Text>Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs</Text>
+          </View>
+        </Collapsible>
+
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-})
-
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: '300',
+    marginBottom: 20,
+  },
+  header: {
+    backgroundColor: '#F5FCFF',
+    padding: 10,
+  },
+  headerText: {
+    textAlign: 'left',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  content: {
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  active: {
+    backgroundColor: 'rgba(255,255,255,1)',
+  },
+  inactive: {
+    backgroundColor: 'rgba(245,252,255,1)',
+  },
+  selectors: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  selector: {
+    backgroundColor: '#F5FCFF',
+    padding: 10,
+  },
+  activeSelector: {
+    fontWeight: 'bold',
+  },
+  selectTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    padding: 10,
+  },
+});
 
 const tempData = {
   "data": {
@@ -141,3 +217,5 @@ const tempData = {
     }
   }
 };
+
+const BACON_IPSUM = 'Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs. Picanha beef prosciutto meatball turkey shoulder shank salami cupim doner jowl pork belly cow. Chicken shankle rump swine tail frankfurter meatloaf ground round flank ham hock tongue shank andouille boudin brisket. ';
