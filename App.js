@@ -29,14 +29,13 @@ export default class App extends React.Component {
                     title="Upcoming Events"
                     navigationBarStyle={{backgroundColor:'#C0D0E4'}}
                     /> 
-                <Scene 
+                  <Scene 
                     key="eventDetail" 
                     component={EventDetailScene} 
                     animation="fade"
                     title="Event Detail"
                     navigationBarStyle={{backgroundColor:'#C0D0E4'}}
-                    initial
-                    />                                            
+                    />                                              
             </Scene>
         </Router>
     );
