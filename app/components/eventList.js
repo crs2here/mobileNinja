@@ -73,7 +73,7 @@ export default class EventList extends Component {
                     {/*date*/}                  
                     <Text style={styles.dateBoxText}> {moment(event.eventDate).format("MMM Do")} </Text>   
                     {/*time of event*/} 
-                    <Text style={styles.dateBoxText}> {moment(event.eventDate).format("h:mm a")} </Text> 
+                    <Text style={styles.dateBoxText}> {moment(event.eventDate.time).format("h:mm a")} </Text> 
                   </Col>
                   <Col style={styles.detailBox} >
                     <View style={styles.detailBoxView}>
