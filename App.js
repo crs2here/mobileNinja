@@ -4,6 +4,7 @@ import React, { Component } from "react"
 // Scenes
 import MainScene from "./app/scenes/mainScene";
 import EventScene from "./app/scenes/eventScene";
+import EventDetailScene from "./app/scenes/eventDetailScene";
 
 // Stores
 import AuthStore from "./app/stores/authStore"
@@ -27,7 +28,15 @@ export default class App extends React.Component {
                     animation="fade"
                     title="Upcoming Events"
                     navigationBarStyle={{backgroundColor:'#C0D0E4'}}
-                    />                        
+                    /> 
+                <Scene 
+                    key="eventDetail" 
+                    component={EventDetailScene} 
+                    animation="fade"
+                    title="Event Detail"
+                    navigationBarStyle={{backgroundColor:'#C0D0E4'}}
+                    initial
+                    />                                            
             </Scene>
         </Router>
     );

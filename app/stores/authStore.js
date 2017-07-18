@@ -1,12 +1,12 @@
 import { AsyncStorage } from 'react-native'; 
 import apiBase from '../config/development';
-import { observable, action } from 'mobx';
+// import { observable, action } from 'mobx';
 
 export default class AuthStore {
   
   constructor() {
   }
-  @action
+  // @action
   signIn(username, password) {
     const login = new apiBase;
     return new Promise((resolve, reject) =>{
