@@ -25,7 +25,6 @@ export default class EventStore {
   getEventDetails(token, id) {
     this.headers['x-access-token'] = token;
     return new Promise((resolve, reject) =>{
-      // when I don't have a headache make string dynamic
       fetch(`${this.base.url}/events/contracts/${id}`, {
         method: 'GET', headers: this.headers})
         .then((res) =>resolve(res.json()))

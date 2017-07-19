@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
 import EventStore from '../stores/eventStore';
 import AuthStore from '../stores/authStore';
 import moment from 'moment';
 const auth = new AuthStore();
+
+
+async function storeId (id) {
+  console.log(id); 
+  await AsyncStorage.setItem('id', JSON.stringify(id));
+  Actions.eventDetail(); 
+}    
 
 export default class EventList extends Component {
   constructor(props) {
@@ -61,7 +69,8 @@ export default class EventList extends Component {
         (isLoading)
           ? <Text> Something went wrong </Text> 
           : <List dataArray={upcomingEvents} renderRow={(event) =>           
-            <ListItem onPress={() =>{ console.log(event._id)}}>
+            //console.log(event._id)
+            <ListItem onPress={() =>{storeId(event._id)}}>
               <Grid>
                   {/* 
                     add touchable to row 
@@ -73,7 +82,7 @@ export default class EventList extends Component {
                     {/*date*/}                  
                     <Text style={styles.dateBoxText}> {moment(event.eventDate).format("MMM Do")} </Text>   
                     {/*time of event*/} 
-                    <Text style={styles.dateBoxText}> {moment(event.eventDate.time).format("h:mm a")} </Text> 
+                    <Text style={styles.dateBoxText}> {moment(event.eventDate).format("h:mm a")} </Text> 
                   </Col>
                   <Col style={styles.detailBox} >
                     <View style={styles.detailBoxView}>
@@ -87,7 +96,7 @@ export default class EventList extends Component {
                   </Col>
               </Grid>              
             </ListItem>
-          }>        
+          }>      
         </List>
       }
       </View> 

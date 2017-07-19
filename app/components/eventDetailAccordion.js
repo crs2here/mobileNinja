@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableHighlight} from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { StyleSheet, View, TouchableHighlight, AsyncStorage} from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import Collapsible from 'react-native-collapsible';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -10,6 +11,13 @@ import AuthStore from '../stores/authStore';
 import moment from 'moment';
 const auth = new AuthStore();
 
+
+async function getId () {
+  let response = await AsyncStorage.getItem('id'); 
+  return await JSON.parse(response) || []; 
+}    
+
+  
 export default class EventDetailAccordion extends Component {
   constructor(props) {
     super(props)
@@ -31,40 +39,38 @@ export default class EventDetailAccordion extends Component {
         }); 
       }
       const event = new EventStore();
-      // need to figure out better way of passing both token, and id
-      // temporary hard code id for now just to ensure call is working
-      event.getEventDetails(this.state.token, "5957d62ffdd346e5f5cd53f0 ")
-        .then((response)=>{
-          const event = response.data;
-          const {eventDate, eventName, menuItems, venue, notes, eventSteps} = event;
-          const eventDetails = {eventDate, eventName, menuItems, venue, notes, eventSteps};
-          this.setState({
-            isLoading: false,
-            eventDetails
-          });               
+      getId()
+        .then((id)=>{
+          // need to figure out better way of passing both token, and id
+          event.getEventDetails(this.state.token, id)
+            .then((response)=>{
+              const event = response.data;
+              const { menuItems, notes = "notes are not present", eventSteps} = event;
+              const food = (menuItems.length) ?  menuItems: "food has not been selected";
+              const sequence = (eventSteps.length) ? eventSteps: "event sequence not set";
+              const eventDetails = {food, notes, sequence};
+              console.log(eventDetails);
+              this.setState({
+                isLoading: false,
+                eventDetails
+              });               
+            })
+            .catch((error)=>console.log(`error = ${error}`));      
         })
-        .catch((error)=>{
-          console.log(`error = ${error}`);
-        });      
+        .catch((error)=>console.log(`error = ${error}`));  
     })
-    .catch((error)=>{
-      console.log(`error = ${error}`);
-    }); 
+    .catch((error)=>console.log(`error = ${error}`)); 
   }  
-  // TODO: added list component new list data
+  
   render() {
     const {isLoading, eventDetails} = this.state;
-              {/* <Text>{eventDetails.menuItems[0].name}</Text>              
-              <Text>{eventDetails.menuItems[0].description}</Text>              
-              <Text>{eventDetails.menuItems[0].quantity}</Text>              
-              <Text>{eventDetails.menuItems[0].price}</Text>               */}
     return (
       <View style={styles.container}>
         {
         (isLoading)
         ? <Text> Something went wrong </Text> 
         : 
-        <Container>
+        <Container>  
           <TouchableHighlight onPress={() => { this.setState({ foodCollapsed: !this.state.foodCollapsed });}}>
             <View style={styles.header}>
               <Text>Food</Text>
@@ -72,19 +78,21 @@ export default class EventDetailAccordion extends Component {
           </TouchableHighlight>
           <Collapsible collapsed={this.state.foodCollapsed} align="center">
             <View style={styles.content}>
-              <List dataArray={eventDetails.menuItems} renderRow={(food) =>
-                <ListItem onPress={() => { console.log(event._id) }}>
-                  <Grid>
-                    <Col>
-                      <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-                        <Text style={{alignSelf:'flex-start'}}>item: {food.name}</Text>
-                        <Text style={{alignSelf:'flex-end'}}>price: {food.price}</Text>
-                        <Text style={{alignSelf:'flex-end'}}>quantity: {food.quantity}</Text>
-                      </View>
-                    </Col>
-                  </Grid>
-                </ListItem>
-              }></List>              
+              {(Array.isArray(eventDetails.food)) ? 
+                  <List dataArray={eventDetails.food} renderRow={(food) =>
+                    <ListItem onPress={() => { console.log(event._id) }}>
+                      <Grid>
+                        <Col>
+                          <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+                            <Text style={{alignSelf:'flex-start'}}>item: {food.name}</Text>
+                            <Text style={{alignSelf:'flex-end'}}>price: {food.price}</Text>
+                            <Text style={{alignSelf:'flex-end'}}>quantity: {food.quantity}</Text>
+                          </View>
+                        </Col>
+                      </Grid>
+                    </ListItem>
+                }></List>
+              : <Text>{eventDetails.food}</Text>}             
             </View>
           </Collapsible>
 
@@ -106,19 +114,21 @@ export default class EventDetailAccordion extends Component {
           </TouchableHighlight>
           <Collapsible collapsed={this.state.sequenceCollapsed} align="center">
             <View style={styles.content}>
-              <List dataArray={eventDetails.eventSteps} renderRow={(sequence) =>
-                <ListItem onPress={() => { console.log(event._id) }}>
-                  <Grid>
-                    <Col>
-                      <View style={{justifyContent:'space-between'}}>
-                        <Text style={{alignSelf:'flex-start'}}>time: {moment(sequence.time).format("h:mm a")}</Text>
-                        <Text style={{alignSelf:'flex-start'}}>duration: {sequence.duration}</Text>
-                        <Text style={{alignSelf:'flex-start'}}>{sequence.description}</Text>
-                      </View>
-                    </Col>
-                  </Grid>
-                </ListItem>
-              }></List>                 
+              {(Array.isArray(eventDetails.sequence)) ? 
+                <List dataArray={eventDetails.sequence} renderRow={(sequence) =>
+                  <ListItem onPress={() => { console.log(event._id) }}>
+                    <Grid>
+                      <Col>
+                        <View style={{justifyContent:'space-between'}}>
+                          <Text style={{alignSelf:'flex-start'}}>time: {moment(sequence.time).format("h:mm a")}</Text>
+                          <Text style={{alignSelf:'flex-start'}}>duration: {sequence.duration}</Text>
+                          <Text style={{alignSelf:'flex-start'}}>{sequence.description}</Text>
+                        </View>
+                      </Col>
+                    </Grid>
+                  </ListItem>
+                }></List>
+              : <Text>{eventDetails.sequence}</Text>}                      
             </View>
           </Collapsible>
         </Container>
@@ -127,9 +137,6 @@ export default class EventDetailAccordion extends Component {
     );
   }
 }
-              // <Text>{moment(eventDetails.eventSteps[0]).format("h:mm a")}</Text>
-              // <Text>{eventDetails.eventSteps[0].duration}</Text>
-              // <Text>{eventDetails.eventSteps[0].description}</Text>
 
 const styles = StyleSheet.create({
   container: {
