@@ -37,8 +37,11 @@ export default class EventDetails extends Component {
           event.getEventDetails(this.state.token, id)
             .then((response)=>{
               const selectedEvent = response.data;
-              const {_id, eventDate, eventName, guestCount, location} = selectedEvent;
-              const event = {_id, eventDate, eventName, guestCount, location};
+              console.log(response.data);
+              const {name} = selectedEvent.venue[0] || "";
+              const location= name || "no location set";
+              const {_id, eventDate, eventName, banquetAttendeeHigh} = selectedEvent;
+              const event = {_id, eventDate, eventName, banquetAttendeeHigh, location};
               const { menuItems, notes = "notes are not present", eventSteps} = selectedEvent;
               const food = (menuItems.length) ?  menuItems: "food has not been selected";
               const sequence = (eventSteps.length) ? eventSteps: "event sequence not set";
