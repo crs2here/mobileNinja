@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
 import { StyleSheet, View, TouchableHighlight, AsyncStorage} from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import Collapsible from 'react-native-collapsible';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
-
-import EventStore from '../stores/eventStore';
-import AuthStore from '../stores/authStore';
 import moment from 'moment';
 
-const auth = new AuthStore();
-  
 export default class EventDetailAccordion extends Component {
   constructor(props) {
     super(props)
