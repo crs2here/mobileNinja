@@ -7,12 +7,10 @@ import {  Button,
           Label,
           Text} from 'native-base';
 import { Actions } from 'react-native-router-flux';
-// import { observer } from 'mobx-react/native';
 import AuthStore from '../stores/authStore';
 
 const auth = new AuthStore();
 
-// @observer
 export default class Login extends Component {
   constructor(props) {
     super(props)
