@@ -9,7 +9,7 @@ import moment from 'moment';
 const auth = new AuthStore();
 
 
-async function storeId (id) {
+async function storeId (id) { 
   await AsyncStorage.setItem('id', JSON.stringify(id));
   Actions.eventDetail(); 
 }    
@@ -17,12 +17,12 @@ async function storeId (id) {
 export default class EventDetail extends Component {
   constructor(props) {
     super(props)
-    const {_id, eventDate, eventName, guestCount, location} = this.props.event;
+    const {_id, eventDate, eventName, banquetAttendeeHigh, location} = this.props.event;
     const event = {
       _id,
       eventDate,
       eventName,
-      guestCount,
+      banquetAttendeeHigh,
       location      
     }
     console.log(event);
@@ -47,7 +47,7 @@ export default class EventDetail extends Component {
             <Text> Event name: {event.eventName}</Text>
           </View>                  
           <View style={styles.detailBoxView}>
-            <Text>Guest: {event.guestCount}</Text>
+            <Text>Guest: {event.banquetAttendeeHigh}</Text>
             <Text>  |  </Text>
             <Text>Location: {event.location}</Text>  
           </View>                  
