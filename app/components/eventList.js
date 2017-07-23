@@ -36,14 +36,14 @@ export default class EventList extends Component {
         .then((response)=>{
           // temp num of people hard coded
           let events = response.data.map(function(eventDetail) {
-            const {_id, eventDate, eventName} = eventDetail;
+            const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
             const {name} = eventDetail.venue[0] || "";
             return {
               _id,
               eventDate,
               eventName,
               location: name || "no location set",
-              guestCount: 50              
+              banquetAttendeeHigh
             }
           });
 
