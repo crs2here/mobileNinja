@@ -82,18 +82,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 64,
     flexDirection: 'column'
-  },  
-  header: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
-  },
-  headerText: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  content: {
-    padding: 20,
-    backgroundColor: '#fff',
-  },
+  }
 });
