@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'native-base';
+import { Container, Content } from 'native-base';
 import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import EventDetailAccordion from '../components/eventDetailAccordion'
 import EventDetail from '../components/eventDetail';
@@ -61,16 +61,18 @@ export default class EventDetails extends Component {
   render() {
     const {isLoading, eventDetails, event} = this.state;
     return (
-      <View style={styles.container}> 
-      {
-        (isLoading)
-        ? <Text> Something went wrong </Text> 
-        : <View style={styles.container}>
-            <EventDetail event={event}/>    
-            <EventDetailAccordion eventDetails={eventDetails}/> 
-          </View>
-      }
-      </View> 
+      <Container>
+        <Content>        
+          {
+            (isLoading)
+            ? <Text> Something went wrong </Text> 
+            : <View style={styles.container}>
+                <EventDetail event={event}/>
+                <EventDetailAccordion eventDetails={eventDetails}/> 
+              </View>
+          }
+        </Content>
+      </Container> 
     );
   }
 }
@@ -78,7 +80,8 @@ export default class EventDetails extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 64
+    paddingTop: 64,
+    flexDirection: 'column'
   },  
   header: {
     backgroundColor: '#F5FCFF',
