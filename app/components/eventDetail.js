@@ -25,7 +25,6 @@ export default class EventDetail extends Component {
       banquetAttendeeHigh,
       location      
     }
-    console.log(event);
     this.state = {
       event
     }
