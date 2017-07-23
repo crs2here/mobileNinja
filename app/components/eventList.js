@@ -6,11 +6,11 @@ import { List, ListItem} from 'native-base';
 import EventStore from '../stores/eventStore';
 import AuthStore from '../stores/authStore';
 import moment from 'moment';
+import EventDetail from '../components/eventDetail'
 const auth = new AuthStore();
 
 
-async function storeId (id) {
-  console.log(id); 
+async function storeId (id) { 
   await AsyncStorage.setItem('id', JSON.stringify(id));
   Actions.eventDetail(); 
 }    
@@ -36,14 +36,14 @@ export default class EventList extends Component {
         .then((response)=>{
           // temp num of people hard coded
           let events = response.data.map(function(eventDetail) {
-            const {_id, eventDate, eventName} = eventDetail;
+            const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
             const {name} = eventDetail.venue[0] || "";
             return {
               _id,
               eventDate,
               eventName,
               location: name || "no location set",
-              guestCount: 50              
+              banquetAttendeeHigh
             }
           });
 
@@ -69,32 +69,8 @@ export default class EventList extends Component {
         (isLoading)
           ? <Text> Something went wrong </Text> 
           : <List dataArray={upcomingEvents} renderRow={(event) =>           
-            //console.log(event._id)
             <ListItem onPress={() =>{storeId(event._id)}}>
-              <Grid>
-                  {/* 
-                    add touchable to row 
-                    pass in id, and navigate to route
-                  */}
-                  <Col style={{backgroundColor: '#486C8F', height: 75, width: 75}}>
-                    {/*day of week*/}
-                    <Text style={styles.dateBoxText}> {moment(event.eventDate).format("dddd")} </Text> 
-                    {/*date*/}                  
-                    <Text style={styles.dateBoxText}> {moment(event.eventDate).format("MMM Do")} </Text>   
-                    {/*time of event*/} 
-                    <Text style={styles.dateBoxText}> {moment(event.eventDate).format("h:mm a")} </Text> 
-                  </Col>
-                  <Col style={styles.detailBox} >
-                    <View style={styles.detailBoxView}>
-                      <Text> Event name: {event.eventName}</Text>
-                    </View>                  
-                    <View style={styles.detailBoxView}>
-                      <Text>Guest: {event.guestCount}</Text>
-                      <Text>  |  </Text>
-                      <Text>Location: {event.location}</Text>  
-                    </View>                  
-                  </Col>
-              </Grid>              
+               <EventDetail event={event}/>
             </ListItem>
           }>      
         </List>
