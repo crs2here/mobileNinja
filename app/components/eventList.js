@@ -84,29 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 64
-  },
-  dateBox : {
-    backgroundColor: '#486C8F',
-    color: 'white',
-    height: 75, 
-    width: 75
-  },
-  dateBoxText : {
-    marginTop:5,
-    color: 'white',
-    justifyContent: 'space-around',
-    alignSelf:'center',
-    fontWeight: 'bold'
-  },  
-  detailBox : {
-    backgroundColor: '#F5F5F5', 
-    height: 75,
-    alignItems:'center'
-  },
-  detailBoxView : {
-    flexDirection: 'row', 
-    marginTop: 15
-  },  
+  }
 })
 
 /* this.state.upcomingEvents */
