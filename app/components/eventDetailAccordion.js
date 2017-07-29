@@ -20,7 +20,7 @@ export default class EventDetailAccordion extends Component {
   render() {
     const {eventDetails} = this.state;
     return (
-      <Container>
+      <View style={styles.container}>
         <TouchableHighlight onPress={() => { this.setState({ foodCollapsed: !this.state.foodCollapsed });}}>
           <View style={styles.header}>
             <Text style={styles.accordionHdr}>Food</Text>
@@ -92,7 +92,7 @@ export default class EventDetailAccordion extends Component {
             : <Text>{eventDetails.sequence}</Text>}                      
           </View>
         </Collapsible>
-      </Container>
+      </View>
     );
   }
 }
@@ -117,7 +117,6 @@ export default class EventDetailAccordion extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 64
   },  
   header: {
     backgroundColor: '#F5FCFF',
