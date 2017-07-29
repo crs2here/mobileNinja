@@ -69,11 +69,11 @@ export default class EventDetailAccordion extends Component {
             {(Array.isArray(eventDetails.sequence)) ? 
               <List dataArray={eventDetails.sequence} renderRow={(sequence) =>
                 <ListItem>
-                  <Grid style={{ backgroundColor: '#F5F5F5'}}>
-                    <Col style={{backgroundColor: '#486C8F', height: 70, width: 75}}>
-                      <Text style={styles.dateBoxText}> {moment(sequence.time).format("h:mm a")} </Text>  
-                    </Col>                    
-                    <Col style={{ backgroundColor: '#F5F5F5' }}>
+                  <View style={{flex: 1, flexDirection: 'column'}}>
+                    <View style={{height: 25, backgroundColor: '#486C8F'}}>
+                       <Text style={styles.dateBoxText}> {moment(sequence.time).format("h:mm a")} </Text>
+                    </View>  
+                    <View style={{height: 25, backgroundColor: '#F5F5F5'}}>
                       <Grid>
                         <Col> 
                           <Text style={{fontWeight: 'bold', paddingLeft: 5}}>Duration:</Text>
@@ -81,10 +81,12 @@ export default class EventDetailAccordion extends Component {
                         <Col>                             
                           <Text style={{alignSelf:'flex-end', fontStyle:'italic', paddingRight: 5}}>{sequence.duration}</Text>     
                         </Col>
-                      </Grid>
-                      <Text style={styles.sequenceDetails}>{sequence.description}</Text>                       
-                    </Col>
-                  </Grid>                 
+                      </Grid>                      
+                    </View>
+                    <View style={{backgroundColor: '#F5F5F5'}}>
+                      <Text style={styles.sequenceDetails}>{sequence.description}</Text>
+                    </View>  
+                  </View>
                 </ListItem>
               }></List>
             : <Text>{eventDetails.sequence}</Text>}                      
@@ -94,7 +96,24 @@ export default class EventDetailAccordion extends Component {
     );
   }
 }
-
+/*
+  <Grid style={{ backgroundColor: '#F5F5F5'}}>
+    <Col style={{backgroundColor: '#486C8F', height: 70, width: 75}}>
+      <Text style={styles.dateBoxText}> {moment(sequence.time).format("h:mm a")} </Text>  
+    </Col>                    
+    <Col style={{ backgroundColor: '#F5F5F5' }}>
+      <Grid>
+        <Col> 
+          <Text style={{fontWeight: 'bold', paddingLeft: 5}}>Duration:</Text>
+        </Col>
+        <Col>                             
+          <Text style={{alignSelf:'flex-end', fontStyle:'italic', paddingRight: 5}}>{sequence.duration}</Text>     
+        </Col>
+      </Grid>
+      <Text style={styles.sequenceDetails}>{sequence.description}</Text>                       
+    </Col>
+  </Grid>    
+*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -118,13 +137,13 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   dateBoxText : {
-    paddingTop:30,
+    paddingTop:5,
     color: 'white',
     alignSelf:'center',
     fontWeight: 'bold',
   },
   sequenceDetails : {
     fontStyle:'italic',
-    paddingLeft: 5
+    paddingLeft: 5,
   }  
 });
