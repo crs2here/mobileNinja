@@ -47,9 +47,8 @@ export default class Login extends Component {
   componentDidMount() {
     auth.isLoggedIn()
     .then((token)=>{
-      if(token.length > 0){
+      if(token.length){
         Actions.events();
-        this.setState({token}); 
       }
     })
     .catch((error)=>{
