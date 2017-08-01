@@ -34,23 +34,27 @@ export default class EventList extends Component {
       const event = new EventStore();
       event.getEventData(this.state.token)
         .then((response)=>{
-          // temp num of people hard coded
-          let events = response.data.map(function(eventDetail) {
-            const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
-            const {name} = eventDetail.venue[0] || "";
-            return {
-              _id,
-              eventDate,
-              eventName,
-              location: name || "no location set",
-              banquetAttendeeHigh
-            }
-          });
+          if(response.success) {
+            let events = response.data.map(function(eventDetail) {
+              const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
+              const {name} = eventDetail.venue[0] || "";
+              return {
+                _id,
+                eventDate,
+                eventName,
+                location: name || "no location set",
+                banquetAttendeeHigh
+              }
+            });
 
-          this.setState({
-            isLoading: false,
-            upcomingEvents: events
-          });     
+            this.setState({
+              isLoading: false,
+              upcomingEvents: events
+            }); 
+          } else {
+            auth.storeToken(null);
+            Actions.main();
+          }    
         })
         .catch((error)=>{
           console.log(`error = ${error}`);

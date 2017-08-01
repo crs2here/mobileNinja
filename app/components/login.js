@@ -29,7 +29,7 @@ export default class Login extends Component {
         .then((response)=>{
           if(response.success){
             auth.storeToken(response.token);
-            this.setState({ token: response.token });             
+            this.setState({ token: response.token });           
             Actions.events();
           } else {
             Alert.alert('Invalid Credentials',`please enter a correct data`,[{text: 'ok'}]);
@@ -46,15 +46,8 @@ export default class Login extends Component {
   
   componentDidMount() {
     auth.isLoggedIn()
-    .then((token)=>{
-      if(token.length > 0){
-        Actions.events();
-        this.setState({token}); 
-      }
-    })
-    .catch((error)=>{
-      console.log(`error = ${error}`);
-    });    
+    .then((token)=> (token.length) ? Actions.events() : Actions.main())
+    .catch((error)=> console.log(`error = ${error}`));    
   }  
 
   render() {
