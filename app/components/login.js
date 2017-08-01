@@ -29,15 +29,11 @@ export default class Login extends Component {
         .then((response)=>{
           if(response.success){
             auth.storeToken(response.token);
-            this.setState({ token: response.token });           
             Actions.events();
           } else {
             Alert.alert('Invalid Credentials',`please enter a correct data`,[{text: 'ok'}]);
           }
-        })
-        .catch((error)=>{
-          console.log(`error = ${error}`);
-        })
+        }).catch((error)=>console.log(`error = ${error}`))
     } else {
       const missingData = (!username) ? 'username' : 'password';
       Alert.alert('Missing Data',`please enter a ${missingData}`,[{text: 'ok'}]);
