@@ -34,7 +34,8 @@ export default class EventList extends Component {
       const event = new EventStore();
       event.getEventData(this.state.token)
         .then((response)=>{
-          if(response.success) {
+          console.log(response);
+          if(response.success || response.data.length > 0) {
             let events = response.data.map(function(eventDetail) {
               const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
               const {name} = eventDetail.venue[0] || "";
@@ -52,17 +53,12 @@ export default class EventList extends Component {
               upcomingEvents: events
             }); 
           } else {
+            console.log("welcome to the else");
             auth.storeToken(null);
             Actions.main();
           }    
-        })
-        .catch((error)=>{
-          console.log(`error = ${error}`);
-        });      
-    })
-    .catch((error)=>{
-      console.log(`error = ${error}`);
-    }); 
+        }).catch((error)=>console.log(`error = ${error}`));      
+    }).catch((error)=>console.log(`error = ${error}`)); 
   }
   
   render() {
