@@ -34,7 +34,6 @@ export default class EventList extends Component {
       const event = new EventStore();
       event.getEventData(this.state.token)
         .then((response)=>{
-          console.log(response);
           if(response.success || response.data.length > 0) {
             let events = response.data.map(function(eventDetail) {
               const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
@@ -107,3 +106,4 @@ const styles = StyleSheet.create({
   });
 
 */
+
