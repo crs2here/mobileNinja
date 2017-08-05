@@ -11,9 +11,9 @@ export default class EventDetailAccordion extends Component {
     super(props)
     const {eventDetails} = this.props;
     this.state = {
-      foodCollapsed: true,
-      notesCollapsed: true,
-      sequenceCollapsed: true,
+      foodCollapsed: false,
+      notesCollapsed: false,
+      sequenceCollapsed: false,
       eventDetails
     };    
   }    
