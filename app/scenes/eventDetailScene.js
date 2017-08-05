@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Content } from 'native-base';
 import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
+
 import EventDetailAccordion from '../components/eventDetailAccordion'
 import EventDetail from '../components/eventDetail';
+import Loading from '../components/loading';
 
 import EventStore from '../stores/eventStore';
 import AuthStore from '../stores/authStore';
+
 const auth = new AuthStore();
 
 
@@ -64,7 +67,7 @@ export default class EventDetails extends Component {
         <Content>        
           {
             (isLoading)
-            ? <Text> Something went wrong </Text> 
+            ? <Loading /> 
             : <View style={styles.container}>
                 <EventDetail event={event}/>
                 <EventDetailAccordion eventDetails={eventDetails}/> 

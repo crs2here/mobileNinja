@@ -7,7 +7,6 @@ export default class EventScene extends Component {
     super(props)
     this.state={}
   }
-  //event={}
   render() {
     return (
       <Container>

@@ -9,6 +9,8 @@ import {  Body,
           Item, 
           Text,  
           Title} from 'native-base';
+
+import Loading from '../components/loading';
 import Login from '../components/login';
 import Logo from '../components/logo';
           
@@ -60,11 +62,7 @@ export default class MainScene extends Component {
         </Container>      
       );
     } else {
-      return (
-        <View>
-          <Text> theres an issue</Text>
-        </View>        
-      )
+      return (<Loading />)
     }
   }  
 }
