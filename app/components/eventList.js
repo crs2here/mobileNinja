@@ -3,12 +3,14 @@ import { Actions } from 'react-native-router-flux';
 import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
+import moment from 'moment';
+
+import EventDetail from '../components/eventDetail'
+
 import EventStore from '../stores/eventStore';
 import AuthStore from '../stores/authStore';
-import moment from 'moment';
-import EventDetail from '../components/eventDetail'
-const auth = new AuthStore();
 
+const auth = new AuthStore();
 
 async function storeId (id) { 
   await AsyncStorage.setItem('id', JSON.stringify(id));
@@ -52,7 +54,6 @@ export default class EventList extends Component {
               upcomingEvents: events
             }); 
           } else {
-            console.log("welcome to the else");
             auth.storeToken(null);
             Actions.main();
           }    
