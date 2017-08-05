@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
 
 export default class Loading extends Component {
-
-   state = { animating: true }
-
-   closeActivityIndicator = () => setTimeout(() => this.setState({ animating: false }), 6000)
-
-   componentDidMount = () => this.closeActivityIndicator()
-
    render() {
-      const animating = this.state.animating
       return (
          <View style = {styles.container}>
             <ActivityIndicator
-               animating = {animating}
+               animating = {true}
                color = '#486C8F'
                size = "large"
                style = {styles.activityIndicator}
