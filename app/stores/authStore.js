@@ -16,11 +16,10 @@ export default class AuthStore {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },body: JSON.stringify({username,password})
-      }).then((res) =>{
-        resolve(res.json());
-      }).catch((error)=>{
-        reject(error);
-      }).done();      
+      })
+      .then((res) =>resolve(res.json()))
+      .catch((error)=>reject(error))
+      .done();      
     });
   }
   async isLoggedIn () { 
