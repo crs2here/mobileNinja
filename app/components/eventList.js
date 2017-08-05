@@ -5,7 +5,8 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
 import moment from 'moment';
 
-import EventDetail from '../components/eventDetail'
+import EventDetail from '../components/eventDetail';
+import Loading from '../components/loading';
 
 import EventStore from '../stores/eventStore';
 import AuthStore from '../stores/authStore';
@@ -67,7 +68,7 @@ export default class EventList extends Component {
       <View style={styles.container}>
       { 
         (isLoading)
-          ? <Text> Something went wrong </Text> 
+          ? <Loading/> 
           : <List dataArray={upcomingEvents} renderRow={(event) =>           
             <ListItem onPress={() =>{storeId(event._id)}}>
                <EventDetail event={event}/>
@@ -86,25 +87,3 @@ const styles = StyleSheet.create({
     paddingTop: 64
   }
 })
-
-/* this.state.upcomingEvents */
-/*
- stolen code from fb
-
-  return fetch('https://facebook.github.io/react-native/movies.json')
-  .then((response) => response.json())
-  .then((responseJson) => {
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.setState({
-      isLoading: false,
-      dataSource: ds.cloneWithRows(responseJson.movies),
-    }, function() {
-      // do something with new state
-    });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-
-*/
-
