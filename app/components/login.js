@@ -1,12 +1,14 @@
 import    React, { Component } from 'react';
 import {  Alert, View } from 'react-native';
 import {  Button, 
-          Form, 
+          Form,
+          Icon, 
           Input, 
           Item, 
           Label,
           Text} from 'native-base';
 import { Actions } from 'react-native-router-flux';
+
 import AuthStore from '../stores/authStore';
 
 const auth = new AuthStore();
@@ -52,6 +54,7 @@ export default class Login extends Component {
         <Form>
           <Item floatingLabel>
             <Label>Username</Label>
+            <Icon active name='person'/> 
             <Input 
               onChangeText={(username) => this.setState({username})}
               value={this.state.username}                
@@ -59,6 +62,9 @@ export default class Login extends Component {
           </Item>
           <Item floatingLabel last>
             <Label>Password</Label>
+            
+            <Icon active name='lock'/> 
+            
             <Input  secureTextEntry={true}
                     onChangeText={(password) => this.setState({password})}
                     value={this.state.password}/>
@@ -67,7 +73,6 @@ export default class Login extends Component {
         <Button 
           info block
           onPress={this.signIn.bind(this)}>
-
           <Text style={{color:"white",fontSize:18}}>login</Text>
         </Button>                  
       </View>      
