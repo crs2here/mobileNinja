@@ -60,7 +60,7 @@ export default class Login extends Component {
               value={this.state.username}                
             />                
           </Item>
-          <Item floatingLabel last>
+          <Item floatingLabel>
             <Label>Password</Label>
             
             <Icon active name='lock'/> 
