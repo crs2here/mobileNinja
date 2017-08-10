@@ -17,13 +17,14 @@ async function storeId (id) {
 export default class EventDetail extends Component {
   constructor(props) {
     super(props)
-    const {_id, eventDate, eventName, banquetAttendeeHigh, location} = this.props.event;
+    const {_id, eventDate, eventName, banquetAttendeeHigh, location, serviceType} = this.props.event;
     const event = {
       _id,
       eventDate,
       eventName,
       banquetAttendeeHigh,
-      location      
+      location: location || "location not set",
+      serviceType: serviceType || "type not set"      
     }
     this.state = {
       event
@@ -35,20 +36,22 @@ export default class EventDetail extends Component {
       <Grid>
         <Col style={{backgroundColor: '#486C8F', height: 75, width: 75}}>
           {/*day of week*/}
-          <Text style={styles.dateBoxText}> {moment(event.eventDate).format("dddd")} </Text> 
+          <Text style={[styles.dateBoxText, styles.biggerText]}> {moment(event.eventDate).format("dddd").slice(0,3)} </Text> 
           {/*date*/}                  
-          <Text style={styles.dateBoxText}> {moment(event.eventDate).format("MMM Do")} </Text>   
+          <Text style={[styles.dateBoxText, styles.smallerText]}> {moment(event.eventDate).format("MMM Do")} </Text>   
           {/*time of event*/} 
-          <Text style={styles.dateBoxText}> {moment(event.eventDate).format("h:mm a")} </Text> 
+          <Text style={[styles.dateBoxText, styles.biggerText]}> {moment(event.eventDate).format("h:mm a").slice(0, -1).toUpperCase()} </Text> 
         </Col>
         <Col style={styles.detailBox} >
           <View style={styles.detailBoxView}>
-            <Text> Event name: {event.eventName}</Text>
+            <Text style={styles.biggerText}>{event.eventName}</Text>
           </View>                  
           <View style={styles.detailBoxView}>
-            <Text>Guest: {event.banquetAttendeeHigh}</Text>
+            <Text>{event.banquetAttendeeHigh} ppl</Text>
             <Text>  |  </Text>
-            <Text>Location: {event.location}</Text>  
+            <Text>{event.location}</Text>  
+            <Text>  |  </Text>
+            <Text>{event.serviceType}</Text>  
           </View>                  
         </Col>
       </Grid> 
@@ -66,6 +69,12 @@ const styles = StyleSheet.create({
     color: 'white',
     height: 75, 
     width: 75
+  },
+  biggerText: {
+    fontSize: 16
+  },
+  smallerText: {
+    fontSize: 12,
   },
   dateBoxText : {
     marginTop:5,
