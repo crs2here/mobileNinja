@@ -39,14 +39,15 @@ export default class EventList extends Component {
         .then((response)=>{
           if(response.success || response.data.length > 0) {
             let events = response.data.map(function(eventDetail) {
-              const {_id, eventDate, eventName, banquetAttendeeHigh} = eventDetail;
+              const {_id, eventDate, eventName, banquetAttendeeHigh, serviceType} = eventDetail;
               const {name} = eventDetail.venue[0] || "";
               return {
                 _id,
                 eventDate,
                 eventName,
                 location: name || "no location set",
-                banquetAttendeeHigh
+                banquetAttendeeHigh,
+                serviceType: serviceType || "type not set"
               }
             });
 
