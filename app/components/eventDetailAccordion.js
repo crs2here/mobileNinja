@@ -5,7 +5,8 @@ import Collapsible from 'react-native-collapsible';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
 import moment from 'moment';
-
+import EventDetailAccordionItem from '../components/eventDetailAccordionItem'
+// this needs to be cleaned up 
 export default class EventDetailAccordion extends Component {
   constructor(props) {
     super(props)
@@ -31,21 +32,9 @@ export default class EventDetailAccordion extends Component {
             {(Array.isArray(eventDetails.food)) ? 
                 <List dataArray={eventDetails.food} renderRow={(food) =>
                   <ListItem>
-                    <View style={{flex: 1, flexDirection: 'column'}}>
-                    <View style={{height: 25, backgroundColor: '#486C8F'}}>
-                      <Grid>
-                        <Col> 
-                          <Text style={[styles.dateBoxText, styles.start]}> {food.name} </Text> 
-                        </Col>
-                        <Col>                             
-                          <Text style={[styles.dateBoxText, styles.end]}>{food.quantity} @ {food.price}</Text>    
-                        </Col>
-                      </Grid>                         
-                    </View>  
-                    <View style={{backgroundColor: '#F5F5F5', padding: 15}}>
-                      <Text style={styles.sequenceDetails}>{food.description}</Text>
-                    </View>  
-                    </View>                    
+                    <EventDetailAccordionItem item={{description: food.description, 
+                                                     leftHeader:food.name,
+                                                     rightHeader:`${food.quantity} @ ${food.price}`}}/>
                   </ListItem>
               }></List>
             : <Text>{eventDetails.food}</Text>}             
@@ -73,22 +62,10 @@ export default class EventDetailAccordion extends Component {
             {(Array.isArray(eventDetails.sequence)) ? 
               <List dataArray={eventDetails.sequence} renderRow={(sequence) =>
                 <ListItem>
-                  <View style={{flex: 1, flexDirection: 'column'}}>
-                    <View style={{height: 25, backgroundColor: '#486C8F'}}>
-                      <Grid>
-                        <Col> 
-                          <Text style={[styles.dateBoxText, styles.start]}> {moment(sequence.time).format("h:mm a")}</Text> 
-                        </Col>
-                        <Col>                             
-                          {/* could be hours need to build in logic */}
-                          <Text style={[styles.dateBoxText, styles.end]}>{sequence.duration}m</Text>    
-                        </Col>
-                      </Grid>                         
-                    </View>  
-                    <View style={{backgroundColor: '#F5F5F5', padding: 15}}>
-                      <Text style={styles.sequenceDetails}>{sequence.description}</Text>
-                    </View>  
-                  </View>
+                  {/* could be hours or minutes for  duration this logic needs to be built in here  */}
+                  <EventDetailAccordionItem item={{description: sequence.description, 
+                                                   leftHeader:moment(sequence.time).format("h:mm a"),
+                                                   rightHeader:`${sequence.duration}m`}}/>
                 </ListItem>
               }></List>
             : <Text>{eventDetails.sequence}</Text>}                      
