@@ -31,17 +31,21 @@ export default class EventDetailAccordion extends Component {
             {(Array.isArray(eventDetails.food)) ? 
                 <List dataArray={eventDetails.food} renderRow={(food) =>
                   <ListItem>
-                    <Grid>
-                      <Col>
-                        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-                          <Text style={{alignSelf:'flex-start', fontWeight: 'bold'}}>{food.name}</Text>
-                          <Text style={{alignSelf:'flex-end', fontWeight: 'bold'}}>{food.quantity}@{food.price}</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>  
-                          <Text style={{alignSelf:'flex-start', fontStyle:'italic', paddingTop: 10}}>{food.description}</Text>
-                        </View>
-                      </Col>
-                    </Grid>
+                    <View style={{flex: 1, flexDirection: 'column'}}>
+                    <View style={{height: 25, backgroundColor: '#486C8F'}}>
+                      <Grid>
+                        <Col> 
+                          <Text style={[styles.dateBoxText, styles.start]}> {food.name} </Text> 
+                        </Col>
+                        <Col>                             
+                          <Text style={[styles.dateBoxText, styles.end]}>{food.quantity} @ {food.price}</Text>    
+                        </Col>
+                      </Grid>                         
+                    </View>  
+                    <View style={{backgroundColor: '#F5F5F5', padding: 15}}>
+                      <Text style={styles.sequenceDetails}>{food.description}</Text>
+                    </View>  
+                    </View>                    
                   </ListItem>
               }></List>
             : <Text>{eventDetails.food}</Text>}             
@@ -73,14 +77,15 @@ export default class EventDetailAccordion extends Component {
                     <View style={{height: 25, backgroundColor: '#486C8F'}}>
                       <Grid>
                         <Col> 
-                          <Text style={[styles.dateBoxText, styles.start]}> {moment(sequence.time).format("h:mm a")} </Text> 
+                          <Text style={[styles.dateBoxText, styles.start]}> {moment(sequence.time).format("h:mm a")}</Text> 
                         </Col>
                         <Col>                             
-                          <Text style={[styles.dateBoxText, styles.end]}>{sequence.duration}</Text>    
+                          {/* could be hours need to build in logic */}
+                          <Text style={[styles.dateBoxText, styles.end]}>{sequence.duration}m</Text>    
                         </Col>
                       </Grid>                         
                     </View>  
-                    <View style={{backgroundColor: '#F5F5F5'}}>
+                    <View style={{backgroundColor: '#F5F5F5', padding: 15}}>
                       <Text style={styles.sequenceDetails}>{sequence.description}</Text>
                     </View>  
                   </View>
