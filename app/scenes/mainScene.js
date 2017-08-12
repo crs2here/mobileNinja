@@ -43,11 +43,14 @@ export default class MainScene extends Component {
               <Body>
                 <Title>Welcome to banquet.ninja</Title>
               </Body>
-            </Header>          
+            </Header>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <Logo/>          
+            </View>  
+            <Login {...this.props}/>
             <Card style={{ flex: 0 }}>
               <CardItem style={{ backgroundColor: '#F5F5F5' }}>
                 <Body>
-                  <Logo/>
                   <Text style={{ textAlign: 'left', marginTop: 6, marginBottom: 25, fontSize: 16, fontWeight: 'bold' }}>Banquet Ninja is dedicated to your success.</Text>
                   <Text>
                     Our heritage is over 20 years of serving banquets and during that time we have crafted workflows that make our company run. Banquet Ninja wants you to participate in an ecosystem where ideas for success are shared and the workflows put those ideas into practice.
@@ -56,8 +59,7 @@ export default class MainScene extends Component {
                     Really hard.{"\n"}Banquet Ninja can help make it easier.</Text>
                 </Body>
               </CardItem>
-            </Card>
-            <Login {...this.props}/>                   
+            </Card>            
           </Content>       
         </Container>      
       );
