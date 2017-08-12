@@ -84,11 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     padding: 10,
   },
-  headerText: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '500',
-  },
   content: {
     padding: 20,
     backgroundColor: '#fff',
@@ -96,21 +91,5 @@ const styles = StyleSheet.create({
   accordionHdr: {
     fontWeight: 'bold', 
     fontSize: 16
-  },
-  dateBoxText : {
-    paddingTop:5,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  start: {
-    paddingLeft: 5
-  },
-  end: {
-    alignSelf:'flex-end', 
-    paddingRight: 5
-  },
-  sequenceDetails : {
-    fontStyle:'italic',
-    paddingLeft: 5,
-  }  
+  }
 });
