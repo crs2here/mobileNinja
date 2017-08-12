@@ -36,11 +36,11 @@ export default class EventDetail extends Component {
       <Grid>
         <Col style={{backgroundColor: '#486C8F', height: 75, width: 75}}>
           {/*day of week*/}
-          <Text style={[styles.dateBoxText, styles.biggerText]}> {moment(event.eventDate).format("dddd").slice(0,3)} </Text> 
+          <Text style={[styles.dateBoxText, styles.biggerText]}> {moment(event.eventDate).format("dddd").slice(0,3).toUpperCase()} </Text> 
           {/*date*/}                  
           <Text style={[styles.dateBoxText, styles.smallerText]}> {moment(event.eventDate).format("MMM Do")} </Text>   
           {/*time of event*/} 
-          <Text style={[styles.dateBoxText, styles.biggerText]}> {moment(event.eventDate).format("h:mm a").slice(0, -1).toUpperCase()} </Text> 
+          <Text style={[styles.dateBoxText, styles.biggerText]}> {moment(event.eventDate).format("h:mma").slice(0, -1).toLowerCase()} </Text> 
         </Col>
         <Col style={styles.detailBox} >
           <View style={styles.detailBoxView}>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   smallerText: {
-    fontSize: 12,
+    fontSize: 11,
   },
   dateBoxText : {
     marginTop:5,
