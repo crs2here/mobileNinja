@@ -59,10 +59,6 @@ export default class EventDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 64
-  },
   dateBox : {
     backgroundColor: '#486C8F',
     color: 'white',
