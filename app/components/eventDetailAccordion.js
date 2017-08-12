@@ -5,7 +5,8 @@ import Collapsible from 'react-native-collapsible';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { List, ListItem} from 'native-base';
 import moment from 'moment';
-
+import EventDetailAccordionItem from '../components/eventDetailAccordionItem'
+// this needs to be cleaned up 
 export default class EventDetailAccordion extends Component {
   constructor(props) {
     super(props)
@@ -31,17 +32,9 @@ export default class EventDetailAccordion extends Component {
             {(Array.isArray(eventDetails.food)) ? 
                 <List dataArray={eventDetails.food} renderRow={(food) =>
                   <ListItem>
-                    <Grid>
-                      <Col>
-                        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-                          <Text style={{alignSelf:'flex-start', fontWeight: 'bold'}}>{food.name}</Text>
-                          <Text style={{alignSelf:'flex-end', fontWeight: 'bold'}}>{food.quantity}@{food.price}</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>  
-                          <Text style={{alignSelf:'flex-start', fontStyle:'italic', paddingTop: 10}}>{food.description}</Text>
-                        </View>
-                      </Col>
-                    </Grid>
+                    <EventDetailAccordionItem item={{description: food.description, 
+                                                     leftHeader:food.name,
+                                                     rightHeader:`${food.quantity} @ ${food.price}`}}/>
                   </ListItem>
               }></List>
             : <Text>{eventDetails.food}</Text>}             
@@ -69,24 +62,10 @@ export default class EventDetailAccordion extends Component {
             {(Array.isArray(eventDetails.sequence)) ? 
               <List dataArray={eventDetails.sequence} renderRow={(sequence) =>
                 <ListItem>
-                  <View style={{flex: 1, flexDirection: 'column'}}>
-                    <View style={{height: 25, backgroundColor: '#486C8F'}}>
-                       <Text style={styles.dateBoxText}> {moment(sequence.time).format("h:mm a")} </Text>
-                    </View>  
-                    <View style={{height: 25, backgroundColor: '#F5F5F5'}}>
-                      <Grid>
-                        <Col> 
-                          <Text style={{fontWeight: 'bold', paddingLeft: 5}}>Duration:</Text>
-                        </Col>
-                        <Col>                             
-                          <Text style={{alignSelf:'flex-end', fontStyle:'italic', paddingRight: 5}}>{sequence.duration}</Text>     
-                        </Col>
-                      </Grid>                      
-                    </View>
-                    <View style={{backgroundColor: '#F5F5F5'}}>
-                      <Text style={styles.sequenceDetails}>{sequence.description}</Text>
-                    </View>  
-                  </View>
+                  {/* could be hours or minutes for  duration this logic needs to be built in here  */}
+                  <EventDetailAccordionItem item={{description: sequence.description, 
+                                                   leftHeader:moment(sequence.time).format("h:mm a"),
+                                                   rightHeader:`${sequence.duration}m`}}/>
                 </ListItem>
               }></List>
             : <Text>{eventDetails.sequence}</Text>}                      
@@ -105,11 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     padding: 10,
   },
-  headerText: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '500',
-  },
   content: {
     padding: 20,
     backgroundColor: '#fff',
@@ -117,15 +91,5 @@ const styles = StyleSheet.create({
   accordionHdr: {
     fontWeight: 'bold', 
     fontSize: 16
-  },
-  dateBoxText : {
-    paddingTop:5,
-    color: 'white',
-    alignSelf:'center',
-    fontWeight: 'bold',
-  },
-  sequenceDetails : {
-    fontStyle:'italic',
-    paddingLeft: 5,
-  }  
+  }
 });

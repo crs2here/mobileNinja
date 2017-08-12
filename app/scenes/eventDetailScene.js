@@ -42,8 +42,8 @@ export default class EventDetails extends Component {
               const selectedEvent = response.data;
               const {name} = selectedEvent.venue[0] || "no location set";
               const location= name;
-              const {_id, eventDate, eventName, banquetAttendeeHigh} = selectedEvent;
-              const event = {_id, eventDate, eventName, banquetAttendeeHigh, location};
+              const {_id, eventDate, eventName, banquetAttendeeHigh, serviceType} = selectedEvent;
+              const event = {_id, eventDate, eventName, banquetAttendeeHigh, location, serviceType};
               const { menuItems, notes = "notes are not present", eventSteps} = selectedEvent;
               const food = (menuItems.length) ?  menuItems: "food has not been selected";
               const sequence = (eventSteps.length) ? eventSteps: "event sequence not set";
