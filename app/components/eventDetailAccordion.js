@@ -71,18 +71,15 @@ export default class EventDetailAccordion extends Component {
                 <ListItem>
                   <View style={{flex: 1, flexDirection: 'column'}}>
                     <View style={{height: 25, backgroundColor: '#486C8F'}}>
-                       <Text style={styles.dateBoxText}> {moment(sequence.time).format("h:mm a")} </Text>
-                    </View>  
-                    <View style={{height: 25, backgroundColor: '#F5F5F5'}}>
                       <Grid>
                         <Col> 
-                          <Text style={{fontWeight: 'bold', paddingLeft: 5}}>Duration:</Text>
+                          <Text style={[styles.dateBoxText, styles.start]}> {moment(sequence.time).format("h:mm a")} </Text> 
                         </Col>
                         <Col>                             
-                          <Text style={{alignSelf:'flex-end', fontStyle:'italic', paddingRight: 5}}>{sequence.duration}</Text>     
+                          <Text style={[styles.dateBoxText, styles.end]}>{sequence.duration}</Text>    
                         </Col>
-                      </Grid>                      
-                    </View>
+                      </Grid>                         
+                    </View>  
                     <View style={{backgroundColor: '#F5F5F5'}}>
                       <Text style={styles.sequenceDetails}>{sequence.description}</Text>
                     </View>  
@@ -121,8 +118,14 @@ const styles = StyleSheet.create({
   dateBoxText : {
     paddingTop:5,
     color: 'white',
-    alignSelf:'center',
     fontWeight: 'bold',
+  },
+  start: {
+    paddingLeft: 5
+  },
+  end: {
+    alignSelf:'flex-end', 
+    paddingRight: 5
   },
   sequenceDetails : {
     fontStyle:'italic',
