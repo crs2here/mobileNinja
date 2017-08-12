@@ -8,7 +8,6 @@ import AuthStore from '../stores/authStore';
 import moment from 'moment';
 const auth = new AuthStore();
 
-
 async function storeId (id) { 
   await AsyncStorage.setItem('id', JSON.stringify(id));
   Actions.eventDetail(); 
